@@ -1,5 +1,4 @@
 
-
 # Import pygame module
 import pygame
 
