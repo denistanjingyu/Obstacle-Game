@@ -1,4 +1,3 @@
-
 # Import pygame module
 import pygame
 
@@ -57,7 +56,7 @@ class Game:
         player = PlayerCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\player.png", 375, 700, 50, 50)
         
         # Load enemy characters
-        enemy_0 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png",20,600,50,50)
+        enemy_0 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", 20, 600, 50, 50)
         enemy_1 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", self.width - 40, 400, 50, 50)
         enemy_2 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", 20, 200, 50, 50)
         
