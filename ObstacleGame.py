@@ -161,7 +161,7 @@ class GameObject:
         self.x_pos = x
         self.y_pos = y
         self.width = width
-        self.height= height
+        self.height = height
     
     # Draw the object on the screen
     def draw(self, background):
