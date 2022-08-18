@@ -51,23 +51,23 @@ class Game:
         win_condition = False
         # Default direction
         direction = 0
-        
+
         # Load player character
         player = PlayerCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\player.png", 375, 700, 50, 50)
-        
+
         # Load enemy characters
         enemy_0 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", 20, 600, 50, 50)
         enemy_1 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", self.width - 40, 400, 50, 50)
         enemy_2 = EnemyCharacter(r"C:\\Users\user\\Desktop\\Pygame Project Files\\enemy.png", 20, 200, 50, 50)
-        
+
         # Set difficulty of enemy characters based on speed
         enemy_0.speed *= speed_difficulty
         enemy_1.speed *= speed_difficulty
         enemy_2.speed *= speed_difficulty
-        
+
         # Load treasure
         treasure = GameObject(r"C:\\Users\user\\Desktop\\Pygame Project Files\\treasure.png", 375, 50, 50, 50)
-        
+
         # Main game loop
         while not is_game_over:
             # Make a call to one of four functions in the pygame.event module in order for pygame to internally interact with your OS
@@ -77,45 +77,43 @@ class Game:
                 # Exit game loop upon encountering a quit type event
                 if event.type == pygame.QUIT:
                     is_game_over = True
-                # Detect when key is pressed
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP:
                         direction = 1
                     elif event.key == pygame.K_DOWN:
                         direction = -1
-                # Detect when key is released        
                 elif event.type == pygame.KEYUP:
-                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    if event.key in [pygame.K_UP, pygame.K_DOWN]:
                         direction = 0
                 print(event) 
-                
+
             # Redraw the screen
-            self.game_screen.fill(white_color)  
+            self.game_screen.fill(white_color)
             self.game_screen.blit(self.image, (0, 0))
-            
+
             # Draw the treasure
             treasure.draw(self.game_screen)
-            
+
             # Update player position
             player.move(direction, screen_height)
             # Draw player at new position
             player.draw(self.game_screen)
-            
+
             # Update enemy position
             enemy_0.move(self.width)
             # Draw enemy at new position
             enemy_0.draw(self.game_screen)
-            
+
             # Introduce one more enemy atlevel 4
             if speed_difficulty > 3:
                 enemy_1.move(self.width)
                 enemy_1.draw(self.game_screen)
-                
+
             # Introduce one more enemy atlevel 6
             if speed_difficulty > 5:
                 enemy_1.move(self.width)
                 enemy_1.draw(self.game_screen)
-                
+
             # Detect collision
             if player.detect_collision(enemy_0):
                 is_game_over = True
@@ -125,7 +123,7 @@ class Game:
                 pygame.display.update()
                 clock.tick(1)
                 break
-                
+
             # Reach the treasure
             elif player.detect_collision(treasure):
                 is_game_over = True
@@ -135,12 +133,12 @@ class Game:
                 pygame.display.update()
                 clock.tick(1)
                 break
-                
+
             # Update game graphics        
             pygame.display.update()
             # Tick the clock to update at given fps    
             clock.tick(self.tick_rate)
-            
+
         # Restart the game if win and exit if lose    
         if win_condition:
             self.run_game_loop(speed_difficulty + 1)
